@@ -44,16 +44,14 @@
   </main>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 import {
   getDelimiter,
   getShortcutIsEnabled,
   setDelimiter,
   setShortcutIsEnabled,
 } from '~/logic/storage';
-</script>
 
-<script lang="ts">
 export default {
   data() {
     return {

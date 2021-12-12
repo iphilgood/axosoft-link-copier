@@ -17,7 +17,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 import 'virtual:windi.css';
 import * as clipboard from 'clipboard-polyfill';
 import { createKeybindingsHandler } from 'tinykeys';
@@ -26,9 +26,7 @@ import {
   getShortcutIsEnabled,
   onShortcutEnabledChanged,
 } from '~/logic/storage';
-</script>
 
-<script lang="ts">
 interface IAppData {
   tooltipIsReady: boolean;
   tooltipIsVisible: boolean;
