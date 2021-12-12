@@ -7,9 +7,9 @@ let app: VueApp;
 
 // Firefox `browser.tabs.executeScript()` requires scripts return a primitive value
 (() => {
-  console.log('[axo] Extension initialized');
+  // console.log('[axo] Extension initialized');
   if (!window.location.origin.includes('axosoft.com')) {
-    console.info('[axo] No Axosoft URL detected');
+    // console.info('[axo] No Axosoft URL detected');
     return;
   }
 
@@ -30,7 +30,7 @@ let app: VueApp;
   shadowDOM.appendChild(rootEl);
 
   const bodyEl = document.getElementsByTagName('body')[0];
-  console.log('[axo] Found body', bodyEl);
+  // console.log('[axo] Found body', bodyEl);
 
   const mutationObserver = new MutationObserver((records: MutationRecord[]) => {
     const classChangeRecord = records.find(
@@ -45,7 +45,7 @@ let app: VueApp;
       return;
     }
 
-    console.log('[axo] ClassName', className);
+    // console.log('[axo] ClassName', className);
     if (
       className.includes('popout') ||
       className.includes('page-viewItem') ||
