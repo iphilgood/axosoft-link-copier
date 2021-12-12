@@ -1,7 +1,7 @@
 {
   "name": "axosoft-link-copier",
   "displayName": "Axosoft Link Copier",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Copies links of an Axosoft item to easily share",
   "private": true,
   "scripts": {
