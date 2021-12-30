@@ -15,7 +15,7 @@ This is a Firefox and Chromium browser extension which allows you to copy nice l
 ## Downloads
 
 - [Firefox](https://addons.mozilla.org/en-GB/firefox/addon/axosoft-link-copier/)
-- Chromium (still waiting for approval)
+- [Chromium](https://chrome.google.com/webstore/detail/axosoft-link-copier/hegmcnlplcgnkbgcgjeaahhccocffllg)
 
 ## Shoutouts
 
