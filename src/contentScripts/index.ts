@@ -7,7 +7,7 @@ let app: VueApp;
 
 // Firefox `browser.tabs.executeScript()` requires scripts return a primitive value
 (() => {
-  // console.log('[axo] Extension initialized');
+  console.log('[axo] Extension initialized');
   if (!window.location.origin.includes('axosoft.com')) {
     // console.info('[axo] No Axosoft URL detected');
     return;
@@ -30,7 +30,7 @@ let app: VueApp;
   shadowDOM.appendChild(rootEl);
 
   const bodyEl = document.getElementsByTagName('body')[0];
-  // console.log('[axo] Found body', bodyEl);
+  console.log('[axo] Found body', bodyEl);
 
   const mutationObserver = new MutationObserver((records: MutationRecord[]) => {
     const classChangeRecord = records.find(
@@ -44,16 +44,21 @@ let app: VueApp;
     if (!className) {
       return;
     }
+    console.log('[axo] ClassName', className);
 
-    // console.log('[axo] ClassName', className);
+    if (app) {
+      console.log('[axo] unmount');
+      unmountButton();
+    }
+
     if (
       className.includes('popout') ||
       className.includes('page-viewItem') ||
       className.includes('page-editItem')
     ) {
-      mountButton(containerEl, rootEl);
+      mountDetailButton(containerEl, rootEl);
     } else {
-      unmountButton();
+      mountOverviewButton(containerEl, rootEl);
     }
   });
   mutationObserver.observe(bodyEl, {
@@ -61,13 +66,40 @@ let app: VueApp;
   });
 })();
 
-function mountButton(containerEl: HTMLDivElement, rootEl: HTMLDivElement) {
-  const checkIfToolbarDivExist = setInterval(() => {
-    const toolbarEl = document.querySelector('.toolbar.right');
-    if (toolbarEl) {
-      clearInterval(checkIfToolbarDivExist);
-      toolbarEl.appendChild(containerEl);
-      app = createApp(App);
+function mountDetailButton(
+  containerEl: HTMLDivElement,
+  rootEl: HTMLDivElement
+) {
+  console.log('[axo] mount detail');
+  containerEl.style.position = 'static';
+  containerEl.style.top = '';
+  containerEl.style.right = '';
+  mountButton('.toolbar.right', containerEl, rootEl, 'detail');
+}
+
+function mountOverviewButton(
+  containerEl: HTMLDivElement,
+  rootEl: HTMLDivElement
+) {
+  console.log('[axo] mount overview');
+  containerEl.style.position = 'absolute';
+  containerEl.style.top = '5px';
+  containerEl.style.right = '5px';
+  mountButton('.ontime-menubar.main', containerEl, rootEl, 'overview');
+}
+
+function mountButton(
+  mountElSelector: string,
+  containerEl: HTMLDivElement,
+  rootEl: HTMLDivElement,
+  context: string
+) {
+  const checkIfMountElExists = setInterval(() => {
+    const mountEl = document.querySelector(mountElSelector);
+    if (mountEl) {
+      clearInterval(checkIfMountElExists);
+      mountEl.appendChild(containerEl);
+      app = createApp(App, { context });
       app.mount(rootEl);
     }
   }, 100);
