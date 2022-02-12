@@ -34,6 +34,10 @@ interface IAppData {
 }
 
 export default {
+  props: {
+    context: String,
+  },
+  setup() {},
   data(): IAppData {
     return {
       tooltipIsReady: false,
@@ -42,6 +46,7 @@ export default {
     };
   },
   async mounted() {
+    console.log('MOUNTED', this.context);
     setTimeout(() => {
       this.tooltipIsReady = true;
     }, 100);
@@ -57,9 +62,12 @@ export default {
   },
   methods: {
     async handleClick() {
-      const url = this.getItemUrl();
-      const description = await this.getItemDescription();
-      const item = this.buildClipboardItem(url, description);
+      let item: clipboard.ClipboardItemInterface;
+      if (this.context === 'overview') {
+        item = await this.buildOverviewItem();
+      } else {
+        item = await this.buildDetailItem();
+      }
       clipboard.write([item]).then(
         () => {
           this.copySuccess();
@@ -68,6 +76,16 @@ export default {
           console.error(error);
         }
       );
+    },
+    async buildOverviewItem(): Promise<clipboard.ClipboardItemInterface> {
+      const url = this.getOverviewItemUrl();
+      const description = await this.getOverviewItemDescription();
+      return this.buildClipboardItem(url, description);
+    },
+    async buildDetailItem(): Promise<clipboard.ClipboardItemInterface> {
+      const url = this.getDetailItemUrl();
+      const description = await this.getDetailItemDescription();
+      return this.buildClipboardItem(url, description);
     },
     buildClipboardItem(itemUrl: string, itemDescription: string) {
       const html = `<a href=\"${itemUrl}\">${itemDescription}</a>`;
@@ -89,7 +107,7 @@ export default {
         this.tooltipIsVisible = false;
       }, 1000);
     },
-    getItemId(): string {
+    getDetailItemId(): string {
       const itemId = document.querySelector('.item-field-id')?.textContent;
       if (!itemId) {
         return '';
@@ -97,7 +115,7 @@ export default {
 
       return itemId;
     },
-    getItemTitle(): string {
+    getDetailItemTitle(): string {
       let itemTitle = document.querySelector('.item-field-name')?.textContent;
       if (!itemTitle) {
         const titleInput = document.querySelector(
@@ -111,19 +129,53 @@ export default {
 
       return itemTitle;
     },
-    async getItemDescription(): Promise<string> {
-      const itemId = this.getItemId();
-      const itemTitle = this.getItemTitle();
-      const delimiter = await getDelimiter();
-      return `${itemId}${delimiter}${itemTitle}`;
-    },
-    getItemUrl(): string {
-      const origin = window.location.origin;
-      const itemId = this.getItemId();
-      if (!origin || !itemId) {
+    getOverviewItemId(): string {
+      const selectedItem = document.querySelector('.yui3-cardgrid-item-focus');
+      const itemId =
+        selectedItem?.querySelector("[data-column='id']")?.textContent;
+      if (!itemId) {
         return '';
       }
 
+      return itemId;
+    },
+    getOverviewItemTitle(): string {
+      const selectedItem = document.querySelector('.yui3-cardgrid-item-focus');
+      const itemTitle = selectedItem?.querySelector(
+        "[data-column='name']"
+      )?.textContent;
+      if (!itemTitle) {
+        return '';
+      }
+
+      return itemTitle;
+    },
+    async getOverviewItemDescription(): Promise<string> {
+      const itemId = this.getOverviewItemId();
+      const itemTitle = this.getOverviewItemTitle();
+      const delimiter = await getDelimiter();
+      return `${itemId}${delimiter}${itemTitle}`;
+    },
+    getOverviewItemUrl(): string {
+      const origin = window.location.origin;
+      const itemId = this.getOverviewItemId();
+      if (!origin || !itemId) {
+        return '';
+      }
+      return `${origin}/viewitem?id=${itemId}&type=features&force_use_number=true`;
+    },
+    async getDetailItemDescription(): Promise<string> {
+      const itemId = this.getDetailItemId();
+      const itemTitle = this.getDetailItemTitle();
+      const delimiter = await getDelimiter();
+      return `${itemId}${delimiter}${itemTitle}`;
+    },
+    getDetailItemUrl(): string {
+      const origin = window.location.origin;
+      const itemId = this.getDetailItemId();
+      if (!origin || !itemId) {
+        return '';
+      }
       return `${origin}/viewitem?id=${itemId}&type=features&force_use_number=true`;
     },
     buildKeyboardHandler(): EventListener {
