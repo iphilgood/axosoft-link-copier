@@ -2,6 +2,7 @@
 import { createApp } from 'vue';
 import { App as VueApp } from '@vue/runtime-core';
 import App from './views/App.vue';
+import { Context } from './context';
 
 let app: VueApp;
 
@@ -74,7 +75,7 @@ function mountDetailButton(
   containerEl.style.position = 'static';
   containerEl.style.top = '';
   containerEl.style.right = '';
-  mountButton('.toolbar.right', containerEl, rootEl, 'detail');
+  mountButton('.toolbar.right', containerEl, rootEl, Context.Detail);
 }
 
 function mountOverviewButton(
@@ -85,7 +86,7 @@ function mountOverviewButton(
   containerEl.style.position = 'absolute';
   containerEl.style.top = '5px';
   containerEl.style.right = '5px';
-  mountButton('.ontime-menubar.main', containerEl, rootEl, 'overview');
+  mountButton('.ontime-menubar.main', containerEl, rootEl, Context.Overview);
 }
 
 function mountButton(
