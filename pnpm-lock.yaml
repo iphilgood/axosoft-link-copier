@@ -26,7 +26,7 @@ specifiers:
   rimraf: ^3.0.2
   tinykeys: ^1.3.0
   typescript: ^4.4.3
-  unplugin-auto-import: ^0.4.8
+  unplugin-auto-import: ^0.5.11
   unplugin-icons: ^0.11.4
   unplugin-vue-components: ^0.15.4
   vite: ^2.6.2
@@ -63,7 +63,7 @@ devDependencies:
   rimraf: 3.0.2
   tinykeys: 1.3.0
   typescript: 4.4.3
-  unplugin-auto-import: 0.4.8_@vueuse+core@7.6.1+vite@2.6.2
+  unplugin-auto-import: 0.5.11_@vueuse+core@7.6.1+vite@2.6.2
   unplugin-icons: 0.11.4_d7afbeb2654c3780066bb7395b84518f
   unplugin-vue-components: 0.15.5_vite@2.6.2+vue@3.2.19
   vite: 2.6.2
@@ -167,6 +167,12 @@ packages:
 
   /@antfu/utils/0.3.0:
     resolution: {integrity: sha512-UU8TLr/EoXdg7OjMp0h9oDoIAVr+Z/oW9cpOxQQyrsz6Qzd2ms/1CdWx8fl2OQdFpxGmq5Vc4TwfLHId6nAZjA==}
+    dependencies:
+      '@types/throttle-debounce': 2.1.0
+    dev: true
+
+  /@antfu/utils/0.4.0:
+    resolution: {integrity: sha512-gqkpvjkgFUu+s3kP+Ly33OKpo5zvVY3FDFhv5BIb98SncS3KD6DNxPfNDjwHIoyXbz1leWo1j8DtRLZ1D2Jv+Q==}
     dependencies:
       '@types/throttle-debounce': 2.1.0
     dev: true
@@ -520,6 +526,14 @@ packages:
     dependencies:
       estree-walker: 2.0.2
       picomatch: 2.3.0
+    dev: true
+
+  /@rollup/pluginutils/4.1.2:
+    resolution: {integrity: sha512-ROn4qvkxP9SyPeHaf7uQC/GPFY6L/OWy9+bd9AwcjOAWQwxRscoEyAUD8qCY5o5iL4jqQwoLk2kaTKJPb/HwzQ==}
+    engines: {node: '>= 8.0.0'}
+    dependencies:
+      estree-walker: 2.0.2
+      picomatch: 2.3.1
     dev: true
 
   /@sindresorhus/is/0.14.0:
@@ -3205,6 +3219,12 @@ packages:
       has: 1.0.3
     dev: true
 
+  /is-core-module/2.8.1:
+    resolution: {integrity: sha512-SdNCUs284hr40hFTFP6l0IfZ/RSrMXF3qgoRHd3/79unUTvrFO/JoXwkGm+5J/Oe3E/b5GsnG330uUNgRpu1PA==}
+    dependencies:
+      has: 1.0.3
+    dev: true
+
   /is-date-object/1.0.5:
     resolution: {integrity: sha512-9YQaSxsAiSwcvS33MBk3wTCVnWK+HhF8VZR2jRxehM16QcVOdHqPn4VPHmRK4lSr38n9JriurInLcP90xsYNfQ==}
     engines: {node: '>= 0.4'}
@@ -3593,6 +3613,11 @@ packages:
       parse-json: 4.0.0
       pify: 3.0.0
       strip-bom: 3.0.0
+    dev: true
+
+  /local-pkg/0.4.1:
+    resolution: {integrity: sha512-lL87ytIGP2FU5PWwNDo0w3WhIo2gopIAxPg9RxDYF7m4rr5ahuZxP22xnJHIvaLTe4Z9P6uKKY2UHiwyB4pcrw==}
+    engines: {node: '>=14'}
     dev: true
 
   /locate-path/2.0.0:
@@ -4245,6 +4270,11 @@ packages:
     engines: {node: '>=8.6'}
     dev: true
 
+  /picomatch/2.3.1:
+    resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
+    engines: {node: '>=8.6'}
+    dev: true
+
   /pidtree/0.3.1:
     resolution: {integrity: sha512-qQbW94hLHEqCg7nhby4yRC7G2+jYHY4Rguc2bjw7Uug4GIJuu1tvf2uHaZv5Q8zdt+WKJ6qK1FOI6amaWUo5FA==}
     engines: {node: '>=0.10'}
@@ -4610,6 +4640,15 @@ packages:
     dependencies:
       is-core-module: 2.6.0
       path-parse: 1.0.7
+    dev: true
+
+  /resolve/1.22.0:
+    resolution: {integrity: sha512-Hhtrw0nLeSrFQ7phPp4OOcVjLPIeMnRlr5mcnVuMe7M/7eBn98A3hmFRLoFo3DLZkivSYwhRUJTyPyWAk56WLw==}
+    hasBin: true
+    dependencies:
+      is-core-module: 2.8.1
+      path-parse: 1.0.7
+      supports-preserve-symlinks-flag: 1.0.0
     dev: true
 
   /resolve/2.0.0-next.3:
@@ -5072,6 +5111,11 @@ packages:
       has-flag: 4.0.0
     dev: true
 
+  /supports-preserve-symlinks-flag/1.0.0:
+    resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
+    engines: {node: '>= 0.4'}
+    dev: true
+
   /table/6.7.1:
     resolution: {integrity: sha512-ZGum47Yi6KOOFDE8m223td53ath2enHcYLgOCjGr5ngu8bdIARQk6mN/wRMv4yMRcHnCSnHbCEha4sobQx5yWg==}
     engines: {node: '>=10.0.0'}
@@ -5304,23 +5348,24 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: true
 
-  /unplugin-auto-import/0.4.8_@vueuse+core@7.6.1+vite@2.6.2:
-    resolution: {integrity: sha512-qK7loR5lz1ctkw9cXBpNxelkYVGqQnyBdtDX7vX12MCEJpddNnKzxgKq/vAK+7VDoojQ2RU14++V7DeV/+SoDw==}
+  /unplugin-auto-import/0.5.11_@vueuse+core@7.6.1+vite@2.6.2:
+    resolution: {integrity: sha512-MJ3POLe/IysRHF4yd32FkKDoxqSRoiuIHm89ys67B8FLuz2Pvh9poeqTVe6IhJsNxwv0+GSdFfj5Dpq24lhm4g==}
     engines: {node: '>=14'}
     peerDependencies:
-      '@vueuse/core': ^6.0.0
+      '@vueuse/core': '*'
     peerDependenciesMeta:
       '@vueuse/core':
         optional: true
     dependencies:
-      '@antfu/utils': 0.3.0
-      '@rollup/pluginutils': 4.1.1
+      '@antfu/utils': 0.4.0
+      '@rollup/pluginutils': 4.1.2
       '@vueuse/core': 7.6.1_vue@3.2.19
-      has-pkg: 0.0.1
+      local-pkg: 0.4.1
       magic-string: 0.25.7
-      resolve: 1.20.0
-      unplugin: 0.2.16_vite@2.6.2
+      resolve: 1.22.0
+      unplugin: 0.3.2_vite@2.6.2
     transitivePeerDependencies:
+      - esbuild
       - rollup
       - vite
       - webpack
@@ -5387,6 +5432,27 @@ packages:
       vite: ^2.3.0
       webpack: 4 || 5
     peerDependenciesMeta:
+      rollup:
+        optional: true
+      vite:
+        optional: true
+      webpack:
+        optional: true
+    dependencies:
+      vite: 2.6.2
+      webpack-virtual-modules: 0.4.3
+    dev: true
+
+  /unplugin/0.3.2_vite@2.6.2:
+    resolution: {integrity: sha512-5d0DMYNKZU+S9eZUiBfw6Co32eRg8myUgBPoWSqG/wDFCUE/WznfSsJnZWi1P9l69x4uLJqt2qVq1xW/AsXFrw==}
+    peerDependencies:
+      esbuild: '>=0.13'
+      rollup: ^2.50.0
+      vite: ^2.3.0
+      webpack: 4 || 5
+    peerDependenciesMeta:
+      esbuild:
+        optional: true
       rollup:
         optional: true
       vite:
