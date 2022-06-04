@@ -1,5 +1,8 @@
 <template>
-  <div class="relative h-30px -top-2 flex items-center font-sans select-none">
+  <div
+    class="relative flex-1 flex items-center font-sans select-none"
+    :class="[className]"
+  >
     <div
       v-if="tooltipIsReady"
       class="opacity-0 bg-axo-dark text-axo-gray rounded-md shadow w-max h-min font-medium"
@@ -37,6 +40,7 @@ export default {
       tooltipIsReady: false,
       tooltipIsVisible: false,
       keyboardHandler: null,
+      className: '',
     };
   },
   async mounted() {
@@ -44,6 +48,8 @@ export default {
     setTimeout(() => {
       this.tooltipIsReady = true;
     }, 100);
+    this.className = `axo-app-${this.context}`;
+    console.log(this.className);
     this.keyboardHandler = this.buildKeyboardHandler();
     const shortcutIsEnabled = await getShortcutIsEnabled();
     if (shortcutIsEnabled) {

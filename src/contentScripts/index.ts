@@ -16,7 +16,12 @@ let app: VueApp;
 
   // mount component to context window
   const containerEl = document.createElement('div');
+
   const rootEl = document.createElement('div');
+  rootEl.classList.add('axo-root');
+  rootEl.style.height = '100%';
+  rootEl.style.display = 'flex';
+
   const styleEl = document.createElement('link');
   const shadowDOM =
     containerEl.attachShadow?.({
@@ -72,9 +77,11 @@ function mountDetailButton(
   rootEl: HTMLDivElement
 ) {
   console.log('[axo] mount detail');
-  containerEl.style.position = 'static';
+  containerEl.style.position = '';
   containerEl.style.top = '';
   containerEl.style.right = '';
+  containerEl.style.height = '';
+  containerEl.style.marginTop = '-7px';
   mountButton('.toolbar.right', containerEl, rootEl, Context.Detail);
 }
 
@@ -84,8 +91,10 @@ function mountOverviewButton(
 ) {
   console.log('[axo] mount overview');
   containerEl.style.position = 'absolute';
-  containerEl.style.top = '5px';
+  containerEl.style.top = '0';
   containerEl.style.right = '5px';
+  containerEl.style.height = '100%';
+  containerEl.style.marginTop = '';
   mountButton('.ontime-menubar.main', containerEl, rootEl, Context.Overview);
 }
 
