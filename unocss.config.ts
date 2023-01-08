@@ -10,4 +10,11 @@ export default defineConfig({
   transformers: [
     transformerDirectives(),
   ],
+  theme: {
+    colors: {
+      axoDark: '#1c2933',
+      axoIcon: '#607a8a',
+      axoGray: '#d7e0e0',
+    },
+  },
 })
