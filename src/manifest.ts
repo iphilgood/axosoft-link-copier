@@ -31,15 +31,9 @@ export async function getManifest() {
       48: './assets/icon-512.png',
       128: './assets/icon-512.png',
     },
-    permissions: [
-      'tabs',
-      'storage',
-      'activeTab',
-      'http://*/',
-      'https://*/',
-    ],
+    permissions: ['storage', 'https://*.axosoft.com/*'],
     content_scripts: [{
-      matches: ['http://*/*', 'https://*/*'],
+      matches: ['https://*.axosoft.com/*'],
       js: ['./dist/contentScripts/index.global.js'],
     }],
     web_accessible_resources: [
