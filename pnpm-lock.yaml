@@ -14,6 +14,7 @@ specifiers:
   '@vue/test-utils': ^2.2.4
   '@vueuse/core': ^9.6.0
   chokidar: ^3.5.3
+  clipboard-polyfill: ^3.0.3
   cross-env: ^7.0.3
   crx: ^5.0.1
   eslint: ^8.28.0
@@ -51,6 +52,7 @@ devDependencies:
   '@vue/test-utils': 2.2.7_vue@3.2.45
   '@vueuse/core': 9.10.0_vue@3.2.45
   chokidar: 3.5.3
+  clipboard-polyfill: 3.0.3
   cross-env: 7.0.3
   crx: 5.0.1
   eslint: 8.31.0
@@ -1593,6 +1595,10 @@ packages:
   /cli-boxes/3.0.0:
     resolution: {integrity: sha512-/lzGpEWL/8PfI0BmBOPRwp0c/wFNX1RdUML3jK/RcSBA9T8mZDdQpqYBKtCFTOfQbwPqWEOpjqW+Fnayc0969g==}
     engines: {node: '>=10'}
+    dev: true
+
+  /clipboard-polyfill/3.0.3:
+    resolution: {integrity: sha512-hts0o01ZkwjA1qHA5gFePzAj/780W7v+eyN3GdaCRyDnapzcPsKRV5aodv77gcr40NDIcyNjNmc+HvfKV+jD0g==}
     dev: true
 
   /cliui/8.0.1:

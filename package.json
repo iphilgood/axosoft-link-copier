@@ -38,6 +38,7 @@
     "@vue/test-utils": "^2.2.4",
     "@vueuse/core": "^9.6.0",
     "chokidar": "^3.5.3",
+    "clipboard-polyfill": "^3.0.3",
     "cross-env": "^7.0.3",
     "crx": "^5.0.1",
     "eslint": "^8.28.0",
