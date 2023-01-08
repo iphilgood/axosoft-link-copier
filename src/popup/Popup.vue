@@ -1,3 +1,13 @@
+<script lang="ts">
+export default {
+  methods: {
+    openOptionsPage() {
+      browser.runtime.openOptionsPage();
+    },
+  },
+};
+</script>
+
 <template>
   <main class="w-[300px] px-4 py-5 text-center text-gray-700">
     <Logo />
@@ -16,13 +26,3 @@
     </button>
   </main>
 </template>
-
-<script lang="ts">
-export default {
-  methods: {
-    openOptionsPage() {
-      browser.runtime.openOptionsPage();
-    },
-  },
-};
-</script>

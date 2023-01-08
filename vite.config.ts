@@ -1,13 +1,15 @@
-import { dirname, relative } from 'path';
-import { defineConfig, UserConfig } from 'vite';
-import Vue from '@vitejs/plugin-vue';
-import Icons from 'unplugin-icons/vite';
-import IconsResolver from 'unplugin-icons/resolver';
-import Components from 'unplugin-vue-components/vite';
-import AutoImport from 'unplugin-auto-import/vite';
-import WindiCSS from 'vite-plugin-windicss';
-import windiConfig from './windi.config';
-import { r, port, isDev } from './scripts/utils';
+/// <reference types="vitest" />
+
+import { dirname, relative } from 'path'
+import type { UserConfig } from 'vite'
+import { defineConfig } from 'vite'
+import Vue from '@vitejs/plugin-vue'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+import Components from 'unplugin-vue-components/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import UnoCSS from 'unocss/vite'
+import { isDev, port, r } from './scripts/utils'
 
 export const sharedConfig: UserConfig = {
   root: r('src'),
@@ -26,7 +28,9 @@ export const sharedConfig: UserConfig = {
       imports: [
         'vue',
         {
-          'webextension-polyfill': [['*', 'browser']],
+          'webextension-polyfill': [
+            ['*', 'browser'],
+          ],
         },
       ],
       dts: r('src/auto-imports.d.ts'),
@@ -36,7 +40,7 @@ export const sharedConfig: UserConfig = {
     Components({
       dirs: [r('src/components')],
       // generate `components.d.ts` for ts support with Volar
-      dts: true,
+      dts: r('src/components.d.ts'),
       resolvers: [
         // auto import icons
         IconsResolver({
@@ -48,24 +52,30 @@ export const sharedConfig: UserConfig = {
     // https://github.com/antfu/unplugin-icons
     Icons(),
 
+    // https://github.com/unocss/unocss
+    UnoCSS(),
+
     // rewrite assets to use relative path
     {
       name: 'assets-rewrite',
       enforce: 'post',
       apply: 'build',
       transformIndexHtml(html, { path }) {
-        return html.replace(
-          /"\/assets\//g,
-          `"${relative(dirname(path), '/assets')}/`
-        );
+        return html.replace(/"\/assets\//g, `"${relative(dirname(path), '/assets')}/`)
       },
     },
   ],
   optimizeDeps: {
-    include: ['vue', '@vueuse/core', 'webextension-polyfill'],
-    exclude: ['vue-demi'],
+    include: [
+      'vue',
+      '@vueuse/core',
+      'webextension-polyfill',
+    ],
+    exclude: [
+      'vue-demi',
+    ],
   },
-};
+}
 
 export default defineConfig(({ command }) => ({
   ...sharedConfig,
@@ -92,12 +102,8 @@ export default defineConfig(({ command }) => ({
       },
     },
   },
-  plugins: [
-    ...sharedConfig.plugins!,
-
-    // https://github.com/antfu/vite-plugin-windicss
-    WindiCSS({
-      config: windiConfig,
-    }),
-  ],
-}));
+  test: {
+    globals: true,
+    environment: 'jsdom',
+  },
+}))

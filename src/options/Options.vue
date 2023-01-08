@@ -1,3 +1,33 @@
+<script lang="ts">
+import {
+  getDelimiter,
+  getShortcutIsEnabled,
+  setDelimiter,
+  setShortcutIsEnabled,
+} from '~/logic/storage'
+
+export default {
+  data() {
+    return {
+      delimiter: '',
+      shortcutIsEnabled: false,
+    }
+  },
+  watch: {
+    async delimiter(newDelimiter: string, _oldDelimiter: string) {
+      await setDelimiter(newDelimiter)
+    },
+    async shortcutIsEnabled(newValue: boolean) {
+      await setShortcutIsEnabled(newValue)
+    },
+  },
+  async mounted() {
+    this.delimiter = await getDelimiter()
+    this.shortcutIsEnabled = await getShortcutIsEnabled()
+  },
+}
+</script>
+
 <template>
   <main class="text-gray-700 dark:text-gray-200">
     <div class="container mx-auto max-w-screen-sm px-4">
@@ -16,7 +46,7 @@
           v-model="delimiter"
           class="border border-gray-400 rounded px-2 py-1"
           name="delimiter"
-        />
+        >
       </div>
 
       <div class="mb-4">
@@ -26,7 +56,7 @@
           type="checkbox"
           class="border border-gray-400 rounded px-2 py-1"
           name="shortcutIsEnabled"
-        />
+        >
         <label class="ml-2 text-sm" for="shortcutIsEnabled">
           Shortcut is enabled
         </label>
@@ -43,33 +73,3 @@
     </div>
   </main>
 </template>
-
-<script lang="ts">
-import {
-  getDelimiter,
-  getShortcutIsEnabled,
-  setDelimiter,
-  setShortcutIsEnabled,
-} from '~/logic/storage';
-
-export default {
-  data() {
-    return {
-      delimiter: '',
-      shortcutIsEnabled: false,
-    };
-  },
-  watch: {
-    async delimiter(newDelimiter: string, _oldDelimiter: string) {
-      await setDelimiter(newDelimiter);
-    },
-    async shortcutIsEnabled(newValue: boolean) {
-      await setShortcutIsEnabled(newValue);
-    },
-  },
-  async mounted() {
-    this.delimiter = await getDelimiter();
-    this.shortcutIsEnabled = await getShortcutIsEnabled();
-  },
-};
-</script>

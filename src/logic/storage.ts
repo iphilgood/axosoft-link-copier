@@ -1,3 +1,7 @@
+import { useStorageLocal } from '~/composables/useStorageLocal'
+
+export const storageDemo = useStorageLocal('webext-demo', 'Storage Demo')
+
 const storageKey = 'axosoft-link-copier';
 const defaultDelimiter = ' - ';
 
@@ -59,3 +63,4 @@ async function getStorageObj(): Promise<IStorageObj> {
 function setStorageObj(storageObj: IStorageObj): Promise<void> {
   return browser.storage.local.set({ [storageKey]: storageObj });
 }
+

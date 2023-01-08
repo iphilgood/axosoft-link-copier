@@ -1,13 +1,17 @@
 import { defineConfig } from 'vite'
-import WindiCSS from 'vite-plugin-windicss'
 import { sharedConfig } from './vite.config'
-import { r, isDev } from './scripts/utils'
-import windiConfig from './windi.config'
+import { isDev, r } from './scripts/utils'
 import packageJson from './package.json'
 
 // bundling the content script using Vite
 export default defineConfig({
   ...sharedConfig,
+  define: {
+    '__DEV__': isDev,
+    // https://github.com/vitejs/vite/issues/9320
+    // https://github.com/vitejs/vite/issues/9186
+    'process.env.NODE_ENV': JSON.stringify(isDev ? 'development' : 'production'),
+  },
   build: {
     watch: isDev
       ? {}
@@ -28,16 +32,4 @@ export default defineConfig({
       },
     },
   },
-  plugins: [
-    ...sharedConfig.plugins!,
-
-    // https://github.com/antfu/vite-plugin-windicss
-    WindiCSS({
-      config: {
-        ...windiConfig,
-        // disable preflight to avoid css population
-        preflight: false,
-      },
-    }),
-  ],
 })
